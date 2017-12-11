@@ -10,7 +10,7 @@
 return array(
 
 	// Base site URL
-	'siteUrl' => null,
+	'siteUrl' => 'http://localhost:8888',
 
 	// Environment-specific variables (see https://craftcms.com/docs/multi-environment-configs#environment-specific-variables)
 	'environmentVariables' => array(),
@@ -22,7 +22,7 @@ return array(
 	'enableCsrfProtection' => true,
 
 	// Whether "index.php" should be visible in URLs (true, false, "auto")
-	'omitScriptNameInUrls' => 'auto',
+	'omitScriptNameInUrls' => true,
 
 	// Control Panel trigger word
 	'cpTrigger' => 'admin',
