@@ -20,14 +20,20 @@
 {% extends "_layout" %}
 
 {% block content %}
-	<h1>{{ entry.title }}</h1>
+  <h1>{{ entry.tagline }}</h1>
 
-	{{ entry.body }}
+  Sign up for our email newsletter to learn about upcoming sales.
 
-	<h2>Recent News</h2>
-	<ul>
-		{% for entry in craft.entries.section('news').limit(5).find() %}
-			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-		{% endfor %}
-	</ul>
+  <div id="upcoming-sales">
+  	<h2>Recent News</h2>
+  	<ul>
+  		{% for entry in craft.entries.section('sales') %}
+  			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+  		{% endfor %}
+  	</ul>
+  </div>
+
+  <div id="setup-sale">
+    {{ entry.saleSetup}}
+  </div>
 {% endblock %}
