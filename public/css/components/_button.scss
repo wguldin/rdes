@@ -1,0 +1,31 @@
+.c-button {
+    padding: .4em .8em;
+    background-image: none;
+    background-color: $color-green-050;
+    border-radius: $border-radius;
+    border: 1px solid darken($color-green-050, 20%);
+    font-family: $sans-stack;
+    font-size: .9em;
+    transition: color 90ms ease-in, background-color 120ms ease-in;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten($color-green-100, 15%);
+        border: 1px solid lighten($color-green-100, 15%);
+        color: lighten($color-green-050, 40%);
+    }
+}
+
+.c-button__group {
+    display: flex;
+    width: 100%;
+    text-align: center;
+
+    > * {
+        flex: 1;
+
+        &:first-child {
+            margin-right: 1.5em;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.c-header__section {
+    font-size: 1.2em;
+    position: relative;
+    padding-left: 1em;
+    margin-bottom: .75em;
+
+    &:before {
+        content: '';
+        background-color: $color-green-050;
+        width: 0.4em;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        border-radius: 3px 0 0 3px;
+    }
+}
+
+.c-header__main {
+    font-size: 2.4em;
+    font-family: $serif-stack;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.c-header__sub {
+    font-size: 1em;
+    margin: -.4em 0 .75em;
+}
+
+.c-header__label {
+    font-size: .9em;
+    text-transform: uppercase;
+    margin: -.4em 0 .75em;
+    color: $color-gray-080;
+}
