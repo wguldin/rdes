@@ -3,3 +3,5 @@
 !/craft/storage/logo/*
 
 /node_modules/*
+
+/public/images/*
