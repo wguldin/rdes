@@ -1,0 +1,53 @@
+body {
+    font-family: $serif-stack;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    background-color: $color-background;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    padding: 1rem 3rem;
+
+    @media (min-width: 42em) {
+        padding: 2rem 6rem;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.25em;
+    font-family: $sans-stack;
+    font-weight: 700;
+    color: $color-green-100;
+    margin: 0;
+}
+
+hr {
+    width: 100%;
+    border: 0;
+    border-bottom: 3px double $color-gray-050;
+    background: transparent;
+    margin: 2em 0;
+}
+
+a {
+    display: inline;
+    text-decoration: none;
+    transition: color 120ms ease-in, background-position 120ms ease-in;
+    color: $color-green-100;
+
+    // Underline
+    background-position: 0 1.05em;
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    background-image: linear-gradient(to bottom, $color-gray-050, $color-gray-050);
+    cursor: pointer;
+
+    &:hover {
+        color: $color-green-100;
+        background-position: 0 1em;
+    }
+}

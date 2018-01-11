@@ -20,20 +20,121 @@
 {% extends "_layout" %}
 
 {% block content %}
-  <h1>{{ entry.tagline }}</h1>
 
-  Sign up for our email newsletter to learn about upcoming sales.
+  <header class="c-hero">
+    <img class="c-hero__logo" src="/assets/images/revised_logo.svg" alt="logo">
+
+    <div class="c-hero__text">
+      <h1 class="c-hero__tagline">{{ entry.tagline }}</h1>
+      <button class="c-button c-hero__cta">Sign Up For Our Newsletter</button>
+    </div>
+  </header>
+
+  <hr>
 
   <div id="upcoming-sales">
-  	<h2>Recent News</h2>
-  	<ul>
-  		{% for entry in craft.entries.section('sales') %}
-  			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-  		{% endfor %}
-  	</ul>
+    <h2 class="c-header__section">Upcoming Sales</h2>
+
+    {% for entry in craft.entries.section('sales') %}
+      <div class="c-media">
+        <div class="c-media__image">
+          {% set asset = entry.photos.first|default(false) %}
+
+          {% if asset %}
+            <img src="{{ asset.getUrl() }}" width=375 />
+          {% endif %}
+
+          <div class="c-button__group u-mt3">
+            <a href="#" class="c-button">Photo Gallery</a>
+            <a target="_BLANK" href="https://www.google.com/maps/search/?api=1&query={{ entry.saleaddress|url_encode }}" class="c-button" >Map to Sale</a>
+          </div>
+        </div>
+        <div class="c-media__body">
+          <h4 class="c-header__sub">
+            {% if entry.saleaddress.street2 %}
+              {{ entry.saleaddress.street }}, {{ entry.saleaddress.street2 }},
+            {% else %}
+              {{ entry.saleaddress.street }},
+            {% endif %}
+
+            {% if entry.saleaddress.region != 'Arkansas' and entry.saleaddress.region != 'AR' %}
+              {{ entry.saleaddress.city }}, {{ entry.saleaddress.region }}
+            {% else %}
+              {{ entry.saleaddress.city }}
+            {% endif %}
+          </h4>
+
+          <h3 class="c-header__main">
+            <a href="{{ entry.url }}">{{ entry.title }}</a>
+          </h3>
+
+          <div class="u-clearfix u-mt4 u-mb4 u-text--lg">
+            <div class="u-float-left">
+              <h5 class="c-header__label u-mb1">Preview</h5>
+
+              <div>
+                {{ entry.salePreviewDate|date("l, M. j") }}
+              </div>
+
+              <div>
+                {{ entry.previewStartTime.localeTime }} - {{ entry.previewEndTime.localeTime }}
+              </div>
+            </div>
+
+            <div class="u-float-left u-ml5">
+              <h5 class="c-header__label u-mb1">Sale</h5>
+
+              <div>
+                {{ entry.saleStartDateFullPrice|date("l, M. j") }} - {{ entry.saleEndDateFullPrice|date("l, M. j") }}
+              </div>
+
+              <div>
+                {{ entry.saleStartTime.localeTime }} - {{ entry.saleEndTime.localeTime }} daily
+              </div>
+            </div>
+          </div>
+
+          <p>{{ entry.saleDescription }}</p>
+
+
+
+          <p>
+            Preview
+            {{ entry.salePreviewDate }}
+          </p>
+
+          <p>
+            Preview Hours
+            {{ entry.previewStartTime.localeTime }} - {{ entry.previewEndTime.localeTime }}
+          </p>
+
+          <p>
+            Sale Hours
+            {{ entry.saleStartTime.localeTime }} - {{ entry.saleEndTime.localeTime }}
+          </p>
+
+          <p>
+            Full
+            {{ entry.saleStartDateFullPrice	}} - {{ entry.saleEndDateFullPrice }}
+          </p>
+
+          <p>
+            20%
+            {{ entry.saleStartDate20Off }} - {{ entry.saleEndDate20Off }}
+          </p>
+
+          <p>
+            50%
+            {{ entry.saleStartDate50Off }} - {{ entry.saleEndDate50Off }}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 
   <div id="setup-sale">
+    <h2 class="c-header__section">Setup a Sale with Us</h2>
+
     {{ entry.saleSetup}}
   </div>
 {% endblock %}
