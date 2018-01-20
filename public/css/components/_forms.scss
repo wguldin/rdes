@@ -1,0 +1,45 @@
+form {
+    font-size: 1em;
+}
+
+label {
+    margin-bottom: 1.5em;
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+    border-radius: $border-radius;
+    border: 1px solid $color-gray-050;
+    padding: .4em .8em;
+    font-size: .9em;
+    display: block;
+    transition: border-color 120ms ease-in;
+
+    $focus-blue: hsl(212, 100%, 58%);
+
+    &:focus {
+        border-color: $focus-blue;
+        box-shadow: inset 0 0 2px rgba($focus-blue, .4);
+    }
+
+    &:focus, &:hover, &:active {
+        outline: 0;
+    }
+}
+
+textarea {
+    resize: vertical;
+    min-height: 7em;
+}
+
+.c-forms__note {
+    font-size: .8em;
+    color: $color-gray-080;
+    line-height: 1.4;
+    margin-top: 1.25em;
+}
+
+.c-forms__note--error {
+    color: $color-validation;
+}

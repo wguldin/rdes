@@ -36,20 +36,21 @@
     <h2 class="c-header__section">Upcoming Sales</h2>
 
     {% for entry in craft.entries.section('sales') %}
-      <div class="c-media">
-        <div class="c-media__image">
+      <div class="c-content-block {{ loop.index is divisible by(2) ? 'c-content-block--alternate' : '' }}">
+        <div class="c-content-block__side">
+          {# Pull out first photo from gallery #}
           {% set asset = entry.photos.first|default(false) %}
 
           {% if asset %}
-            <img src="{{ asset.getUrl() }}" width=375 />
+            <img src="{{ asset.getUrl() }}" />
           {% endif %}
 
           <div class="c-button__group u-mt3">
-            <a href="#" class="c-button">Photo Gallery</a>
-            <a target="_BLANK" href="https://www.google.com/maps/search/?api=1&query={{ entry.saleaddress|url_encode }}" class="c-button" >Map to Sale</a>
+            <a href="{{ entry.url }}#photos" class="c-button">Photos</a>
+            <a target="_BLANK" href="https://www.google.com/maps/search/?api=1&query={{ entry.saleaddress|url_encode }}" class="c-button" >Map</a>
           </div>
         </div>
-        <div class="c-media__body">
+        <div class="c-content-block__main">
           <h4 class="c-header__sub">
             {% if entry.saleaddress.street2 %}
               {{ entry.saleaddress.street }}, {{ entry.saleaddress.street2 }},
@@ -73,7 +74,7 @@
               <h5 class="c-header__label u-mb1">Preview</h5>
 
               <div>
-                {{ entry.salePreviewDate|date("l, M. j") }}
+                {{ entry.previewDate|date("l, M. j") }}
               </div>
 
               <div>
@@ -82,59 +83,93 @@
             </div>
 
             <div class="u-float-left u-ml5">
-              <h5 class="c-header__label u-mb1">Sale</h5>
+              {# Show nearest sale weekend date that is not already past #}
+              {% set break = false %}
+              {% for row in entry.saleDates %}
+                {% if row.saleWeekendEndDate > now and not break %}
+                  {% set break = true %}
+                  <h5 class="c-header__label u-mb1">Sale</h5>
 
-              <div>
-                {{ entry.saleStartDateFullPrice|date("l, M. j") }} - {{ entry.saleEndDateFullPrice|date("l, M. j") }}
-              </div>
+                  {% if row.percentDiscount > 0 %}
+                    <div class="c-badge c-badge--promo">
+                      {{ row.percentDiscount }}% Off!
+                    </div>
+                  {% endif %}
 
-              <div>
-                {{ entry.saleStartTime.localeTime }} - {{ entry.saleEndTime.localeTime }} daily
-              </div>
+                  <div>
+                    {{ row.saleWeekendStartDate|date("l, M. j") }} - {{ row.saleWeekendEndDate|date("l, M. j") }}
+                  </div>
+
+                  <div>
+                    {{ businessHours.businessOpeningHours.localeTime }} - {{ businessHours.businessClosingHours.localeTime }} daily
+                  </div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
 
           <p>{{ entry.saleDescription }}</p>
-
-
-
-          <p>
-            Preview
-            {{ entry.salePreviewDate }}
-          </p>
-
-          <p>
-            Preview Hours
-            {{ entry.previewStartTime.localeTime }} - {{ entry.previewEndTime.localeTime }}
-          </p>
-
-          <p>
-            Sale Hours
-            {{ entry.saleStartTime.localeTime }} - {{ entry.saleEndTime.localeTime }}
-          </p>
-
-          <p>
-            Full
-            {{ entry.saleStartDateFullPrice	}} - {{ entry.saleEndDateFullPrice }}
-          </p>
-
-          <p>
-            20%
-            {{ entry.saleStartDate20Off }} - {{ entry.saleEndDate20Off }}
-          </p>
-
-          <p>
-            50%
-            {{ entry.saleStartDate50Off }} - {{ entry.saleEndDate50Off }}
-          </p>
         </div>
       </div>
     {% endfor %}
   </div>
 
+  <hr>
+
   <div id="setup-sale">
     <h2 class="c-header__section">Setup a Sale with Us</h2>
 
-    {{ entry.saleSetup}}
+    <div class="c-content-block c-content-block--alternate">
+      <div class="c-content-block__side">
+        {% macro errorList(errors) %}
+            {% if errors %}
+              {% for error in errors %}
+                {{ error }}
+              {% endfor %}
+            {% endif %}
+        {% endmacro %}
+
+        {% from _self import errorList %}
+
+        <form method="post" action="" accept-charset="UTF-8">
+            <h4 class="u-mb3">Contact Us</h4>
+
+            {{ getCsrfInput() }}
+            <input type="hidden" name="action" value="contactForm/sendMessage">
+            <input type="hidden" name="redirect" value="contact/thanks">
+
+            <label>
+              Your Name
+              <input type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
+              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('fromName')) }}</span>
+            </label>
+
+            <label>
+              Your Email
+              <input type="email" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
+              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}</span>
+            </label>
+
+            <label>
+              Subject
+              <input type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
+              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('subject')) }}</span>
+            </label>
+
+            <label>
+              Message
+              <textarea name="message">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('message')) }}</span>
+            </label>
+
+            <button type="submit" class="c-button c-button--full u-mt2">
+              Send Message
+            </button>
+        </form>
+      </div>
+      <div class="c-content-block__main">
+        {{ entry.saleSetup}}
+      </div>
+    </div>
   </div>
 {% endblock %}

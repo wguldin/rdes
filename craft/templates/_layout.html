@@ -17,7 +17,8 @@
 	<link rel="home" href="{{ siteUrl }}" />
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Source+Serif+Pro" rel="stylesheet">
-  
+
+  <link rel="stylesheet" href="/dist/css/baguetteBox.min.css"/>
   <link rel="stylesheet" href="/dist/css/main.css"/>
 </head>
 
@@ -32,8 +33,8 @@
           </a>
         </h2>
 
-
 				<ul class="c-nav__list">
+          <li><a class="c-nav__item c-nav__item--mobile c-button" href="/#footer">Menu</a></li>
 					<li><a class="c-nav__item c-button" href="/#upcoming-sales">Upcoming Sales</a></li>
           <li><a class="c-nav__item c-button" href="/#setup-sale">Setup a Sale</a></li>
           <li><a class="c-nav__item c-button" href="/#contact-us">Contact Us</a></li>
@@ -52,6 +53,8 @@
 		<footer id="footer">
 			Copyright {{ now.year }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://craftcms.com">Craft</a>
 		</footer>
+
+    <script src="/dist/js/all.min.js"></script>
 	</div>
 </body>
 </html>

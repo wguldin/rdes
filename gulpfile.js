@@ -23,17 +23,18 @@ gulp.task('sass', function() {
 
 // Concatenate & Miniffy JS
 gulp.task('scripts', function() {
-    return gulp.src('js/*.js')
+    return gulp.src('public/js/*.js')
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('public/dist/js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('public/dist/js'));
 });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('public/css/**/*.scss', ['sass']);
+    gulp.watch('public/js/**/*.js', ['scripts']);
 });
 
 // Default Task

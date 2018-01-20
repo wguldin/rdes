@@ -1,0 +1,19 @@
+.c-badge {
+    color: white;
+    border-radius: $border-radius;
+    width: auto;
+    font-family: $sans-stack;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,.4);
+    padding: 0.3em 0.6em;
+    line-height: 1;
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+$promo-color: hsl(19, 76%, 55%);
+
+.c-badge--promo {
+    border: 1px solid darken($promo-color, 8%);
+    background-color: $promo-color;
+}

@@ -1,13 +1,15 @@
 @import "vendor/_normalize.scss";
 
 @import "_variables.scss";
-@import "_fonts.scss";
 @import "_base.scss";
 
+@import "components/_badge.scss";
 @import "components/_button.scss";
+@import "components/_forms.scss";
+@import "components/_image-grid.scss";
 @import "components/_header.scss";
 @import "components/_hero.scss";
-@import "components/_media.scss";
+@import "components/_content-block.scss";
 @import "components/_nav.scss";
 
 @import "_utilities.scss";

@@ -1,0 +1,61 @@
+.c-image-grid {
+    display: flex;
+}
+
+.c-image-grid__image {
+    margin-bottom: 1em;
+    background-image: none;
+    display: block;
+    position: relative;
+    line-height: 0;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 120ms ease-in 90ms;
+    }
+
+    &:hover, &:focus, &:active {
+        outline: 0;
+
+        &:after {
+            background-color: rgba(0, 0, 0, .15);
+        }
+    }
+}
+
+.c-image-grid__col {
+    flex-grow: 1;
+    margin-right: 1em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+}
+
+/* 2 columns by default, hide columns 2 & 3 */
+.c-image-grid__col--2,
+.c-image-grid__col--3,
+.c-image-grid__col--4 {
+    display: none;
+}
+
+/* 3 columns at medium size */
+@media (min-width: 42em) {
+    .c-image-grid__col--2 { display: block; } /* show column 2 */
+}
+
+/* 4 columns at large size */
+@media (min-width: 68em) {
+    .c-image-grid__col--3 { display: block; } /* show column 3 */
+}
+
+/* 5 columns at x-large size */
+@media (min-width: 80em) {
+    .c-image-grid__col--4 { display: block; } /* show column 3 */
+}

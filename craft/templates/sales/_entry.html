@@ -1,0 +1,45 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<article>
+    <div class="u-text--sm">
+      <h1 class="c-header__main u-mb2">{{ entry.title }}</h1>
+
+      {{ entry.saleDescription }}
+    </div>
+
+    {# ID here to add spacing when coming from photos button jump link #}
+    <div id="photos">
+      <hr>
+
+      <div class="c-image-grid">
+        <div class="c-image-grid__col c-image-grid__col--1"></div>
+        <div class="c-image-grid__col c-image-grid__col--2"></div>
+        <div class="c-image-grid__col c-image-grid__col--3"></div>
+        <div class="c-image-grid__col c-image-grid__col--4"></div>
+        <div class="c-image-grid__col c-image-grid__col--5"></div>
+
+        {% for photo in entry.photos %}
+          <a class="c-image-grid__image" href="/{{ photo.getURL() }}" data-caption="{{ photo.title }}">
+            <img src="/{{ photo.getURL() }}" alt="{{ photo.title }}"/>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+	</article>
+{% endblock %}

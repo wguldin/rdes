@@ -1,27 +1,54 @@
 .c-hero {
     display: flex;
-    max-width: 75em;
     margin: 1.2em auto 1.2em;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+
+    @media (min-width: 42em) {
+        width: 83.35%;
+        flex-direction: row;
+    }
+
+    @media (min-width: 87em) {
+        width: 66.7%;
+    }
 }
 
 .c-hero__logo {
-    flex-basis: 17.5em;
     height: 100%;
+    border: 0;
+    width: 60%;
+    margin: 0 auto 1em;
+
+    @media (min-width: 42em) {
+        width: auto;
+        margin: 0;
+    }
 }
 
 .c-hero__text {
     flex-grow: 1;
-    margin-left: 2em;
+    text-align: center;
+
+    @media (min-width: 42em) {
+        margin-left: 3em;
+        text-align: left;
+    }
 }
 
 .c-hero__tagline {
-    font-size: 2em;
+    font-size: 1.3em;
     font-family: $serif-stack;
     font-weight: 400;
     line-height: 1.4;
     text-transform: none;
     margin: 0;
-    max-width: 52rem;
+
+    @media (min-width: 42em) {
+        text-align: left;
+        font-size: 1.6em;
+    }
 }
 
 .c-hero__cta {

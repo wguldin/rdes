@@ -1,0 +1,20 @@
+.c-content-block {
+    display: flex;
+}
+
+.c-content-block__side {
+    width: 33.3%;
+    padding-right: 6.5%;
+}
+
+.c-content-block__main {
+    width: 66.7%;
+}
+
+.c-content-block--alternate {
+    flex-direction: row-reverse;
+
+    .c-content-block__side {
+        padding: 0 0 0 6.5%;
+    }
+}
