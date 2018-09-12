@@ -25,7 +25,7 @@
     <img class="c-hero__logo" src="/assets/images/revised_logo.svg" alt="logo">
 
     <div class="c-hero__text">
-      <h1 class="c-hero__tagline">{{ entry.tagline }}</h1>
+      <h1 class="c-hero__tagline">{{ entry.title }}</h1>
       <button class="c-button c-hero__cta">Sign Up For Our Newsletter</button>
     </div>
   </header>
@@ -70,19 +70,22 @@
           </h3>
 
           <div class="u-clearfix u-mt4 u-mb4 u-text--lg">
+            {% for row in entry.preview %}
+              {% if row.previewDate > now %}
+                <div class="u-float-left u-mr5">
+                  <h5 class="c-header__label u-mb1">Preview</h5>
+                    <div>
+                      {{ row.previewDate|date("l, M. j") }}
+                    </div>
+
+                    <div>
+                      {{ row.previewStartTime.localeTime }} - {{ row.previewEndTime.localeTime }}
+                    </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+
             <div class="u-float-left">
-              <h5 class="c-header__label u-mb1">Preview</h5>
-
-              <div>
-                {{ entry.previewDate|date("l, M. j") }}
-              </div>
-
-              <div>
-                {{ entry.previewStartTime.localeTime }} - {{ entry.previewEndTime.localeTime }}
-              </div>
-            </div>
-
-            <div class="u-float-left u-ml5">
               {# Show nearest sale weekend date that is not already past #}
               {% set break = false %}
               {% for row in entry.saleDates %}
@@ -101,7 +104,7 @@
                   </div>
 
                   <div>
-                    {{ businessHours.businessOpeningHours.localeTime }} - {{ businessHours.businessClosingHours.localeTime }} daily
+                    {{ companyInformation.businessOpeningHours.localeTime }} - {{ companyInformation.businessClosingHours.localeTime }} daily
                   </div>
                 {% endif %}
               {% endfor %}
