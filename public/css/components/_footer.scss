@@ -1,0 +1,18 @@
+.c-footer {
+    background-color: $color-green-010;
+    border-top: 3px double $color-gray-050;
+    padding: 2em 6.5%;
+    font-family: $sans-stack;
+}
+
+.c-footer__main {
+    font-size: .8em;
+
+    @media (min-width: 36em) {
+        width: 20%;
+    }
+
+    @media (min-width: 54em) {
+        width: 39.8%;
+    }
+}

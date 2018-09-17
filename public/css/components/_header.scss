@@ -4,14 +4,25 @@
     padding-left: 1em;
     margin-bottom: .75em;
 
-    &:before {
+    &:after {
         content: '';
         background-color: $color-green-050;
         width: 0.4em;
-        height: 100%;
+        height: 1.65em;
         position: absolute;
         left: 0;
         border-radius: 3px 0 0 3px;
+    }
+}
+
+.c-header--hash-link-padding {
+    &:before {
+        display: block;
+        content: " ";
+        margin-top: -3em;
+        height: 3em;
+        visibility: hidden;
+        pointer-events: none;
     }
 }
 

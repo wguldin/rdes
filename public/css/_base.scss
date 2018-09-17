@@ -14,7 +14,7 @@ body {
 }
 
 main {
-    padding: 0 6.25%;
+    padding: 4rem 6.25% 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,9 +28,19 @@ h1, h2, h3, h4, h5, h6 {
 hr {
     width: 100%;
     border: 0;
-    border-bottom: 3px double $color-gray-050;
+    border-bottom: 0;
     background: transparent;
-    margin: 2em 0;
+    padding: 2em 0;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        transform: translateY(-50%);
+        border-bottom: 3px double $color-gray-050;
+        left: 0;
+        right: 0;
+    }
 }
 
 img {
@@ -53,7 +63,7 @@ a {
     color: $color-green-100;
 
     // Underline
-    background-position: 0 1.05em;
+    background-position: 0 1.1em;
     background-repeat: repeat-x;
     background-size: 2px 2px;
     background-image: linear-gradient(to bottom, $color-gray-050, $color-gray-050);

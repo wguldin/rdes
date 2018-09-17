@@ -1,0 +1,33 @@
+<form id="subscribe-form" class="modal u-p3" action="" method="POST">
+  {{ getCsrfInput() }}
+  <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
+
+  {% if mailchimpSubscribe is defined %}
+    {% if (not mailchimpSubscribe.success) and (mailchimpSubscribe.errorCode!='1000') %}
+      <p>An error occured. Please try again.</p>
+    {% endif %}
+
+    {% if mailchimpSubscribe.success %}
+      <p>Thank you for signing up!</p>
+    {% endif %}
+  {% endif %}
+
+  <div class="c-forms__divided-fields">
+    <label>
+      First Name
+      <input type="text" name="mcvars[FNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.FNAME }}{% endif %}"/>
+    </label>
+
+    <label>
+      Last Name
+      <input type="text" name="mcvars[LNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.LNAME }}{% endif %}"/>
+    </label>
+  </div>
+
+  <label>
+    Email Address
+    <input type="text" name="email" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.email }}{% endif %}"/>
+  </label>
+
+  <input class="c-button u-mt2" type="submit" name="" value="Send me new sales updates"/>
+</form>

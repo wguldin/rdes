@@ -4,11 +4,13 @@
     background-color: $color-green-050;
     border-radius: $border-radius;
     border: 1px solid darken($color-green-050, 20%);
+    display: inline-block;
     font-family: $sans-stack;
     font-size: .9em;
     transition: color 90ms ease-in, background-color 120ms ease-in;
     cursor: pointer;
     line-height: 1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .25s);
 
     &:hover {
         background-color: lighten($color-green-100, 15%);

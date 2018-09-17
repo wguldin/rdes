@@ -1,6 +1,7 @@
 var rdes = {
     imageGrid: {},
-    gallery: {}
+    gallery: {},
+    modal: {}
 };
 
 // element as first argument
@@ -40,7 +41,7 @@ rdes.imageGrid = (function() {
           columns: '.c-image-grid__col',
           items: '.c-image-grid__image'
         });
-    }, 250);
+    }, 500);
 
     self.init = function() {
         self.setupGrid();
@@ -53,7 +54,7 @@ rdes.imageGrid = (function() {
 // element as first argument
 rdes.gallery = (function() {
     var self = {};
- 
+
     self.init = function() {
         console.log('hit');
 

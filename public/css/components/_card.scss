@@ -1,0 +1,12 @@
+.c-card__grid {
+    display: flex;
+    margin: 2em 0;
+}
+
+.c-card {
+    border: 1px dotted rgba($color-green-075, .5);
+    border-radius: 5px;
+    padding: 1em;
+    font-size: 1.2em;
+    margin-right: 1em;
+}

@@ -6,6 +6,10 @@
     font-size: .8em;
 }
 
+.u-link--no-underline {
+    background: none;
+}
+
 // Float Helpers
 // ========================================================
 
@@ -18,11 +22,7 @@
 }
 
 .u-clearfix {
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+    @include clearfix;
 }
 
 

@@ -1,0 +1,42 @@
+.c-social {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 1em;
+    font-size: 1.2em;
+    float: right;
+
+    @media (min-width: 48em) {
+        width: 26.8%; // Align with grid
+        margin: 0;
+    }
+}
+
+.c-social__item {
+    margin-bottom: 1em;
+}
+
+.c-social__link {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    width: auto;
+    opacity: .7;
+    transition: opacity 120ms ease-in;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.c-social__icon {
+    width: 1.5em;
+    height: 1.5em;
+    border: 0;
+    margin-right: .5em;
+    opacity: .9;
+    transition: opacity 120ms ease-in;
+
+    .c-social__link:hover & {
+        opacity: 1;
+    }
+}

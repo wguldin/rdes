@@ -7,14 +7,16 @@
 
     <div class="c-hero__text">
       <h1 class="c-hero__tagline">{{ entry.title }}</h1>
-      <button class="c-button c-hero__cta">Sign Up For Our Newsletter</button>
+      <a class="c-button c-hero__cta u-mt3" href="#subscribe-form" rel="modal:open">Find Out About New Sales</a>
     </div>
+
+    {% include 'subscribe-form.html' %}
   </header>
 
   <hr>
 
   <div id="upcoming-sales">
-    <h2 class="c-header__section">Upcoming Sales</h2>
+    <h2 class="c-header__section c-header--hash-link-padding">Upcoming Sales</h2>
 
     {% for entry in craft.entries.section('sales') %}
       <div class="c-content-block {{ loop.index is divisible by(2) ? 'c-content-block--alternate' : '' }}">
@@ -23,12 +25,17 @@
           {% set asset = entry.photos.first|default(false) %}
 
           {% if asset %}
-            <img src="{{ asset.getUrl() }}" />
+            <a href="{{ entry.url }}" class="u-link--no-underline">
+              <img src="{{ asset.getUrl() }}" />
+            </a>
           {% endif %}
 
           <div class="c-button__group u-mt3">
             <a href="{{ entry.url }}#photos" class="c-button">Photos</a>
-            <a target="_BLANK" href="https://www.google.com/maps/search/?api=1&query={{ entry.saleaddress|url_encode }}" class="c-button" >Map</a>
+            <a
+              target="_BLANK"
+              href="{{ entry.saleaddress.mapUrl('google')}}"
+              class="c-button" >Map</a>
           </div>
         </div>
         <div class="c-content-block__main">
@@ -50,10 +57,10 @@
             <a href="{{ entry.url }}">{{ entry.title }}</a>
           </h3>
 
-          <div class="u-clearfix u-mt4 u-mb4 u-text--lg">
+          <div class="c-card__grid">
             {% for row in entry.preview %}
               {% if row.previewDate > now %}
-                <div class="u-float-left u-mr5">
+                <div class="c-card">
                   <h5 class="c-header__label u-mb1">Preview</h5>
                     <div>
                       {{ row.previewDate|date("l, M. j") }}
@@ -66,30 +73,32 @@
               {% endif %}
             {% endfor %}
 
-            <div class="u-float-left">
-              {# Show nearest sale weekend date that is not already past #}
-              {% set break = false %}
-              {% for row in entry.saleDates %}
-                {% if row.saleWeekendEndDate > now and not break %}
-                  {% set break = true %}
-                  <h5 class="c-header__label u-mb1">Sale</h5>
+            <a href="{{ entry.url }}" class="u-link--no-underline">
+              <div class="c-card">
+                {# Show nearest sale weekend date that is not already past #}
+                {% set break = false %}
+                {% for row in entry.saleDates %}
+                  {% if row.saleWeekendEndDate > now and not break %}
+                    {% set break = true %}
+                    {% if row.percentDiscount > 0 %}
+                      <div class="c-badge c-badge--promo">
+                        {{ row.percentDiscount }}% Off
+                      </div>
+                    {% endif %}
 
-                  {% if row.percentDiscount > 0 %}
-                    <div class="c-badge c-badge--promo">
-                      {{ row.percentDiscount }}% Off!
+                    <h5 class="c-header__label u-mb1">Sale</h5>
+
+                    <div>
+                      {{ row.saleWeekendStartDate|date("l, M. j") }} - {{ row.saleWeekendEndDate|date("l, M. j") }}
+                    </div>
+
+                    <div>
+                      {{ companyInformation.businessOpeningHours.localeTime }} - {{ companyInformation.businessClosingHours.localeTime }} daily
                     </div>
                   {% endif %}
-
-                  <div>
-                    {{ row.saleWeekendStartDate|date("l, M. j") }} - {{ row.saleWeekendEndDate|date("l, M. j") }}
-                  </div>
-
-                  <div>
-                    {{ companyInformation.businessOpeningHours.localeTime }} - {{ companyInformation.businessClosingHours.localeTime }} daily
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
+                {% endfor %}
+              </div>
+            </a>
           </div>
 
           <p>{{ entry.saleDescription }}</p>
@@ -101,55 +110,11 @@
   <hr>
 
   <div id="setup-sale">
-    <h2 class="c-header__section">Setup a Sale with Us</h2>
+    <h2 class="c-header__section c-header--hash-link-padding">Setup a Sale with Us</h2>
 
     <div class="c-content-block c-content-block--alternate">
       <div class="c-content-block__side">
-        {% macro errorList(errors) %}
-            {% if errors %}
-              {% for error in errors %}
-                {{ error }}
-              {% endfor %}
-            {% endif %}
-        {% endmacro %}
-
-        {% from _self import errorList %}
-
-        <form method="post" action="" accept-charset="UTF-8">
-            <h4 class="u-mb3">Contact Us</h4>
-
-            {{ getCsrfInput() }}
-            <input type="hidden" name="action" value="contactForm/sendMessage">
-            <input type="hidden" name="redirect" value="contact/thanks">
-
-            <label>
-              Your Name
-              <input type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
-              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('fromName')) }}</span>
-            </label>
-
-            <label>
-              Your Email
-              <input type="email" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
-              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}</span>
-            </label>
-
-            <label>
-              Subject
-              <input type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
-              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('subject')) }}</span>
-            </label>
-
-            <label>
-              Message
-              <textarea name="message">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
-              <span class="c-forms__note c-forms__note--error">{{ message is defined and message ? errorList(message.getErrors('message')) }}</span>
-            </label>
-
-            <button type="submit" class="c-button c-button--full u-mt2">
-              Send Message
-            </button>
-        </form>
+        {% include 'contact-us.html' %}
       </div>
       <div class="c-content-block__main">
         {{ entry.saleSetup}}

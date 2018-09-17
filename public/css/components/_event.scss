@@ -1,0 +1,24 @@
+.c-event__container {
+    @include clearfix;
+
+    font-size: 1.2em;
+    margin: 1.5em 0;
+}
+
+.c-event {
+    float: left;
+    margin-right: 3rem;
+}
+
+.c-event__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: .25em;
+}
+
+.c-event__title {
+    font-size: .9em;
+    text-transform: uppercase;
+    margin: 0 .5em 0 0;
+    color: $color-gray-080;
+}

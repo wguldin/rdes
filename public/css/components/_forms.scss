@@ -1,5 +1,6 @@
 form {
     font-size: 1em;
+    max-width: 28em;
 }
 
 label {
@@ -11,7 +12,7 @@ input, textarea {
     width: 100%;
     border-radius: $border-radius;
     border: 1px solid $color-gray-050;
-    padding: .4em .8em;
+    padding: .6em .8em;
     font-size: .9em;
     display: block;
     transition: border-color 120ms ease-in;
@@ -42,4 +43,16 @@ textarea {
 
 .c-forms__note--error {
     color: $color-validation;
+}
+
+.c-forms__divided-fields {
+    display: flex;
+
+    label {
+        width: 48%;
+
+        &:first-child {
+            margin-right: 4%;
+        }
+    }
 }
