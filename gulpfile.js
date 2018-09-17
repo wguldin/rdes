@@ -21,21 +21,10 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('public/dist/css'));
 });
 
-// Concatenate & Miniffy JS
-gulp.task('scripts', function() {
-    return gulp.src('public/js/*.js')
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('public/dist/js'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('public/dist/js'));
-});
-
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('public/css/**/*.scss', ['sass']);
-    gulp.watch('public/js/**/*.js', ['scripts']);
 });
 
 // Default Task
-gulp.task('default', ['sass', 'scripts', 'watch']);
+gulp.task('default', ['sass', 'watch']);

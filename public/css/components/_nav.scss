@@ -1,4 +1,4 @@
-$mobile-nav-breakpoint: 54em;
+$mobile-nav-breakpoint: 52em;
 
 .c-nav {
     display: flex;
@@ -13,11 +13,11 @@ $mobile-nav-breakpoint: 54em;
     left: 0;
     right: 0;
     z-index: 1;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
 
     @media (min-width: $mobile-nav-breakpoint) {
         padding: 0 2rem;
-        flex-wrap: nowrap;
+        //flex-wrap: nowrap;
     }
 }
 
@@ -79,7 +79,7 @@ $mobile-nav-breakpoint: 54em;
 
     @media (min-width: $mobile-nav-breakpoint) {
         margin: .6em .8em;
-        display: inline-block;
+        display: flex;
     }
 }
 
@@ -92,5 +92,13 @@ $mobile-nav-breakpoint: 54em;
 
     @media (min-width: $mobile-nav-breakpoint) {
         margin: 0 0 0 1.5em;
+    }
+}
+
+.c-nav__item--mobile {
+    display: inline-block;
+
+    @media (min-width: $mobile-nav-breakpoint) {
+        display: none;
     }
 }
