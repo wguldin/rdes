@@ -28,17 +28,22 @@
 			<nav class="c-nav">
         <h2 class="c-nav__title">
           <a class="c-nav__title-link" href="{{ siteUrl }}">
-            <img src="/assets" alt="">
-            {{ siteName }}
+            <figure class="c-nav__logo-container">
+              <img class="c-nav__logo" src="/assets/images/revised_logo.svg" alt="logo">
+              <figcaption class="c-nav__logo-text">{{ siteName }}</figcaption>
+            </figure>
           </a>
         </h2>
 
+        <div class="c-nav__mobile">
+          <a class="c-nav__item c-button" href="/#footer">Menu</a>
+        </div>
+
 				<ul class="c-nav__list">
-          <li><a class="c-nav__item c-nav__item--mobile c-button" href="/#footer">Menu</a></li>
 					<li><a class="c-nav__item c-button" href="/#upcoming-sales">Upcoming Sales</a></li>
           <li><a class="c-nav__item c-button" href="/#setup-sale">Setup a Sale</a></li>
           <li><a class="c-nav__item c-button" href="/#contact-us">Contact Us</a></li>
-          <li><a class="c-nav__item c-button" href="/#about">About Us</a></li>
+          {# <li><a class="c-nav__item c-button" href="/blog">Blog</a></li>#}
 				</ul>
 			</nav>
 		</header>
@@ -50,8 +55,34 @@
 			{% endblock %}
 		</main>
 
-		<footer id="footer">
-			Copyright {{ now.year }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://craftcms.com">Craft</a>
+		<footer id="footer" class="c-footer">
+      <ul class="c-social">
+        <li class="c-social__item">
+          <a class="c-social__link" target="_blank" href="https://www.facebook.com/Roy-Dudley-Estate-Sales-146801892020005/">
+            <img class="c-social__icon" src="/assets/images/facebook.svg" alt="Roy Dudley Facebook Page" />
+            <div>Facebook</div>
+          </a>
+        </li>
+        <li class="c-social__item">
+          <a class="c-social__link" target="_blank" href="https://www.instagram.com/roydudley/">
+            <img class="c-social__icon" src="/assets/images/instagram.svg" alt="Roy Dudley Instagram Page" />
+            <div>Instagram</div>
+          </a>
+        </li>
+        <li class="c-social__item">
+          <div class="c-social__link">
+            <span class="u-mr2">Phone:</span> <a href="tel:15016665856" class="u-link--no-underline">501-666-5856</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="c-footer__main">
+        <h6 class="c-header__sub">About Roy</h6>
+        <p>Roy Dudley has over 20 years experience in the antique business, first as a dealer and now as the owner of a full service estate sale company.</p>
+        <p>His expertise ensures even large estates are handled smoothly, and gives him an eye for unique pieces that would otherwise go unnoticed. Please contact us today to inquire about setting up a sale.</p>
+      </div>
+
+			&copy; {{ now.year }} Roy Dudley Estate Sales
 		</footer>
 
     <script src="/dist/js/all.min.js"></script>
